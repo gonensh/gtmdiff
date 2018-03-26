@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+	<link rel="stylesheet" type="text/css" href="lib/jsdifflib/diffview.css"/>
+	<script type="text/javascript" src="lib/jsdifflib/diffview.js"></script>
+	<script type="text/javascript" src="lib/jsdifflib/difflib.js"></script>
     <style>
         #diff-master, 
         #diff-change {
@@ -50,13 +53,28 @@
             color: #900;
             font-family: Arial, Helvetica, sans-serif;
         }
+        .hidden {
+            display: none;
+        }
+        .inline-selector {
+            float: right;
+            padding: 0.5em;
+            border-left: solid 1px #aaa;
+        }
     </style>
 </head>
 <body>
-    <pre id="diff-master" contenteditable></pre>
-    <pre id="diff-change" contenteditable></pre>
+    <pre id="diff-master" class="hidden" contenteditable></pre>
+    <pre id="diff-change" class="hidden" contenteditable></pre>
+    <div id="diffoutput"></div>
     <div class="status-bar">
         <button id="btn-update">Update</button>
+        <div class="inline-selector">
+        <input type="radio" name="inline" id="inline-true" checked="checked" value="1">
+        <label for="inline-true">Inline</label>
+        <input type="radio" name="inline" id="inline-false" value="0">
+        <label for="inline-false">Side-by-side</label>
+        </div>
         <div id="error"></div>
     </div>
     <script src="gtmdiff-panel.js" type="text/javascript" charset="utf-8"></script>

@@ -24,6 +24,8 @@ backgroundPageConnection.postMessage({
 });
 
 document.getElementById('btn-update').addEventListener('click',fetchDiffCode);
+document.getElementById('inline-true').addEventListener('click',fetchDiffCode);
+document.getElementById('inline-false').addEventListener('click',fetchDiffCode);
 fetchDiffCode();
 
 function fetchDiffCode(){
@@ -32,12 +34,12 @@ function fetchDiffCode(){
 		var gtmdiffOutput = {master:(function(){var s='';
 				document.querySelectorAll('.diff-side .CodeMirror-line span[role="presentation"]:not([class])')
 				.forEach(function(e){
-					s+="\\n"+e.textContent;
+					s+="\\r\\n"+e.textContent;
 				});
 				return s;})(),change:(function(){var s='';
 				document.querySelectorAll('.main-side .CodeMirror-line span[role="presentation"]:not([class])')
 				.forEach(function(e){
-					s+="\\n"+e.textContent;
+					s+="\\r\\n"+e.textContent;
 				});
 				return s;})()};
 				gtmdiffOutput;
@@ -45,22 +47,44 @@ function fetchDiffCode(){
 			if(typeof isException !== 'undefined' && isException.isException){
 				console.error('Error in content script: ' + isException);
 			}
+			var masterDiv = document.getElementById('diff-master'),
+			changeDiv = document.getElementById('diff-change');
 			if(typeof result === 'object'){
 				if(typeof result.master === 'string'){
-					document.getElementById('diff-master').innerText = result.master;
+					masterDiv.innerText = result.master;
 				}
 				if(typeof result.change === 'string'){
-					document.getElementById('diff-change').innerText = result.change;
+					changeDiv.innerText = result.change;
+				}
+
+				if(masterDiv.innerText.length > 0 && changeDiv.innerText.length > 0){
+					diffUsingJS(masterDiv.innerText.trim(), changeDiv.innerText.trim());
 				}
 			}
 	});
 }
 
+function diffUsingJS(base, newtxt) {
+	"use strict";
+		var sm = new difflib.SequenceMatcher(base, newtxt),
+		opcodes = sm.get_opcodes(),
+		diffoutputdiv = document.getElementById("diffoutput"),
+		contextSize = 7,
+		viewType = document.getElementById('inline-true').checked ? 1 : 0;
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse){
-	// All runtime messages
-});
+	diffoutputdiv.innerHTML = "";
+	contextSize = contextSize || null;
 
+	diffoutputdiv.appendChild(diffview.buildView({
+		baseTextLines: difflib.stringAsLines(base),
+		newTextLines: difflib.stringAsLines(newtxt),
+		opcodes: opcodes,
+		baseTextName: "Base",
+		newTextName: "Change",
+		contextSize: contextSize,
+		viewType: viewType
+	}));
+}
 
 var injectContentScript = function() {
   // load injected script
