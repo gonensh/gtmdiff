@@ -24,8 +24,8 @@ backgroundPageConnection.postMessage({
 });
 
 document.getElementById('btn-update').addEventListener('click',fetchDiffCode);
-document.getElementById('inline-true').addEventListener('click',fetchDiffCode);
-document.getElementById('inline-false').addEventListener('click',fetchDiffCode);
+document.getElementById('diff-by-word').addEventListener('click',fetchDiffCode);
+document.getElementById('diff-by-line').addEventListener('click',fetchDiffCode);
 fetchDiffCode();
 
 function fetchDiffCode(){
@@ -65,7 +65,8 @@ function fetchDiffCode(){
 }
 
 function diffUsingJSlib(master, change) {
-	var diff = JsDiff.diffLines(master, change),
+	var diffType = document.getElementById('diff-by-word').checked ? 'diffWords' : 'diffLines';
+	var diff = JsDiff[diffType](master, change),
 	diffoutput = document.getElementById("diffoutput"),
 	fragment = document.createDocumentFragment();
 	for (var i = 0; i < diff.length; i++) {
