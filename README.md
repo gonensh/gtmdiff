@@ -1,15 +1,14 @@
 GTMDiff
 ===========
 
-A Chrome extension compatible with Chrome 18+ to allow diffing GTM code within DevTools.
+A Chrome extension to for diffing GTM code within DevTools
 
-# Installation
-Install the extension from the Chrome Web Store, or drop the gtmdiff.crx file into the Chrome browser.
-Then open DevTools and you should see the GTMDiff tab.
+# Installation options
+* Install the extension from the Chrome Web Store
+* Drop the gtmdiff.crx file into the browser
+* Clone the repository and load the unpacked extension into Chrome
 
-Features
-
-   * Diff code from Google Tag Manager
-
-Copyright 2018, Gonen Shoham
-Released under the BSD License
+# Usage
+1. Open a code diff screen in GTM
+2. Open DevTools 
+3. Click on the GTMDiff tab
