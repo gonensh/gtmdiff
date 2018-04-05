@@ -58,32 +58,39 @@ function fetchDiffCode(){
 				}
 
 				if(masterDiv.innerText.length > 0 && changeDiv.innerText.length > 0){
-					diffUsingJS(masterDiv.innerText.trim(), changeDiv.innerText.trim());
+					diffUsingJSlib(masterDiv.innerText.trim(), changeDiv.innerText.trim());
 				}
 			}
 	});
 }
 
-function diffUsingJS(base, newtxt) {
-	"use strict";
-		var sm = new difflib.SequenceMatcher(base, newtxt),
-		opcodes = sm.get_opcodes(),
-		diffoutputdiv = document.getElementById("diffoutput"),
-		contextSize = 7,
-		viewType = document.getElementById('inline-true').checked ? 1 : 0;
+function diffUsingJSlib(master, change) {
+	var diff = JsDiff.diffLines(master, change),
+	diffoutput = document.getElementById("diffoutput"),
+	fragment = document.createDocumentFragment();
+	for (var i = 0; i < diff.length; i++) {
 
-	diffoutputdiv.innerHTML = "";
-	contextSize = contextSize || null;
+		if (diff[i].added && diff[i + 1] && diff[i + 1].removed) {
+			var swap = diff[i];
+			diff[i] = diff[i + 1];
+			diff[i + 1] = swap;
+		}
 
-	diffoutputdiv.appendChild(diffview.buildView({
-		baseTextLines: difflib.stringAsLines(base),
-		newTextLines: difflib.stringAsLines(newtxt),
-		opcodes: opcodes,
-		baseTextName: "Base",
-		newTextName: "Change",
-		contextSize: contextSize,
-		viewType: viewType
-	}));
+		var node;
+		if (diff[i].removed) {
+			node = document.createElement('del');
+			node.appendChild(document.createTextNode(diff[i].value));
+		} else if (diff[i].added) {
+			node = document.createElement('ins');
+			node.appendChild(document.createTextNode(diff[i].value));
+		} else {
+			node = document.createTextNode(diff[i].value);
+		}
+		fragment.appendChild(node);
+	}
+
+	diffoutput.textContent = '';
+	diffoutput.appendChild(fragment);
 }
 
 var injectContentScript = function() {

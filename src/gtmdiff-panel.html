@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-	<link rel="stylesheet" type="text/css" href="lib/jsdifflib/diffview.css"/>
-	<script type="text/javascript" src="lib/jsdifflib/diffview.js"></script>
-	<script type="text/javascript" src="lib/jsdifflib/difflib.js"></script>
+    <title>GTMDiff</title>
+    <link rel="stylesheet" type="text/css" href="lib/jsdiff/style.css"/>
+	<script type="text/javascript" src="lib/jsdiff/diff.js"></script>
     <style>
         #diff-master, 
         #diff-change {
@@ -66,7 +65,7 @@
 <body>
     <pre id="diff-master" class="hidden" contenteditable></pre>
     <pre id="diff-change" class="hidden" contenteditable></pre>
-    <div id="diffoutput"></div>
+    <pre id="diffoutput"></pre>
     <div class="status-bar">
         <button id="btn-update">Update</button>
         <div class="inline-selector">

@@ -1,6 +1,7 @@
 {
 	"name": "GTMDiff",
-	"version": "0.0.1",
+	"version": "0.1.0",
+	"author": "Gonen Shoham",
 	"description": "A DevTools Diff Tool for Google Tag Manager",
 	"devtools_page": "gtmdiff.html",
    	"icons": { "144": "144.png" },
