@@ -93,16 +93,3 @@ function diffUsingJSlib(master, change) {
 	diffoutput.textContent = '';
 	diffoutput.appendChild(fragment);
 }
-
-var injectContentScript = function() {
-  // load injected script
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', chrome.extension.getURL('/content-script.js'), false);
-  xhr.send();
-  var script = xhr.responseText;
-
-  // inject into inspectedWindow
-  chrome.devtools.inspectedWindow.eval(script);
-};
-
-injectContentScript();
