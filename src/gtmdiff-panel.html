@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>GTMDiff</title>
-    <link rel="stylesheet" type="text/css" href="gtmdiff-panel.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/jsdiff/style.css"/>
-	<script type="text/javascript" src="lib/jsdiff/diff.js"></script>
+    <link rel="stylesheet" type="text/css" href="gtmdiff-panel.css" />
+    <link rel="stylesheet" type="text/css" href="lib/jsdiff/style.css" />
+    <script type="text/javascript" src="lib/jsdiff/diff.js"></script>
 </head>
+
 <body>
     <pre id="diff-master" class="hidden" contenteditable></pre>
     <pre id="diff-change" class="hidden" contenteditable></pre>
@@ -14,13 +16,14 @@
     <div class="status-bar">
         <button id="btn-update">Update</button>
         <div class="diff-type-selector">
-        <input type="radio" name="diff-type" id="diff-by-line" checked="checked">
-        <label for="diff-by-line">By Line</label>
-        <input type="radio" name="diff-type" id="diff-by-word">
-        <label for="diff-by-word">By Word</label>
+            <input type="radio" name="diff-type" id="diff-by-line" checked="checked">
+            <label for="diff-by-line">By Line</label>
+            <input type="radio" name="diff-type" id="diff-by-word">
+            <label for="diff-by-word">By Word</label>
         </div>
         <div id="error"></div>
     </div>
     <script src="gtmdiff-panel.js" type="text/javascript" charset="utf-8"></script>
 </body>
+
 </html>
