@@ -12,9 +12,15 @@
 <body>
     <pre id="diff-master" class="hidden" contenteditable></pre>
     <pre id="diff-change" class="hidden" contenteditable></pre>
-    <pre id="diffoutput"></pre>
+    <pre id="diff-output"></pre>
     <div class="status-bar">
         <button id="btn-update">Update</button>
+        <div class="show-code-selector">
+            <input type="radio" name="show-code" id="show-diff" checked="checked">
+            <label for="show-diff">Show Diff</label>
+            <input type="radio" name="show-code" id="show-code">
+            <label for="show-code">Show Code</label>
+        </div>
         <div class="diff-type-selector">
             <input type="radio" name="diff-type" id="diff-by-line" checked="checked">
             <label for="diff-by-line">By Line</label>

@@ -1,27 +1,24 @@
 // DevTools panel
-// Create a connection to the background page
-var backgroundPageConnection = chrome.runtime.connect();
 
-backgroundPageConnection.onMessage.addListener(function (message) {
-	// Ignore messages form other sources
-	if(typeof message.source != 'string' || message.source != 'gtmdiff') {
-		return;
-	}
-	console.log(message);
-	// Handle responses from the background page
-	if(message.master) {
-		document.getElementById('diff-master').innerText = message.master;
-	}
-	if(message.change) {
-		document.getElementById('diff-change').innerText = message.change;
-	}
-});
+document.getElementById('show-code').addEventListener('click',toggleShowCode);
+document.getElementById('show-diff').addEventListener('click',toggleShowCode);
 
-// Relay the tab ID to the background page
-backgroundPageConnection.postMessage({
-	name: 'init',
-	tabId: chrome.devtools.inspectedWindow.tabId
-});
+function toggleShowCode(){
+	var masterDiv = document.getElementById('diff-master'),
+		changeDiv = document.getElementById('diff-change'),
+		outputDiv = document.getElementById('diff-output');
+		debugger;
+	if(document.getElementById('show-diff').checked) {
+		masterDiv.classList.add('hidden');
+		changeDiv.classList.add('hidden');
+		outputDiv.classList.remove('hidden');
+	}
+	else {
+		masterDiv.classList.remove('hidden');
+		changeDiv.classList.remove('hidden');
+		outputDiv.classList.add('hidden');
+	}
+}
 
 document.getElementById('btn-update').addEventListener('click',fetchDiffCode);
 document.getElementById('diff-by-word').addEventListener('click',fetchDiffCode);
@@ -67,7 +64,7 @@ function fetchDiffCode(){
 function diffUsingJSlib(master, change) {
 	var diffType = document.getElementById('diff-by-word').checked ? 'diffWords' : 'diffLines';
 	var diff = JsDiff[diffType](master, change),
-	diffoutput = document.getElementById("diffoutput"),
+	diffoutput = document.getElementById("diff-output"),
 	fragment = document.createDocumentFragment();
 	for (var i = 0; i < diff.length; i++) {
 
@@ -93,3 +90,8 @@ function diffUsingJSlib(master, change) {
 	diffoutput.textContent = '';
 	diffoutput.appendChild(fragment);
 }
+
+
+this.addEventListener('focus', function(){
+	fetchDiffCode();
+});

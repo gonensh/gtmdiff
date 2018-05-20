@@ -1,4 +1,11 @@
 #diff-master, 
+#diff-change,
+#diff-output {
+		overflow: scroll;
+		height: calc(99vh - 30px);
+		margin: 0;
+}
+#diff-master, 
 #diff-change {
 		overflow: scroll;
 		width: 50%;
@@ -47,7 +54,8 @@
 .hidden {
 		display: none;
 }
-.diff-type-selector {
+.diff-type-selector,
+.show-code-selector {
 		float: right;
 		padding: 0.5em;
 		border-left: solid 1px #aaa;

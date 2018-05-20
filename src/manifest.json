@@ -6,9 +6,6 @@
 	"devtools_page": "gtmdiff.html",
    	"icons": { "144": "144.png" },
 	"minimum_chrome_version" : "18",
-	"background": {
-		"scripts": ["background.js"]
-	},
 	"permissions": [
 		"https://tagmanager.google.com/*"
 	],
