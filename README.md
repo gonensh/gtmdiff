@@ -1,7 +1,7 @@
 GTMDiff
 =======
 
-A Chrome extension to for diffing GTM code within DevTools
+A Chrome Devtools extension for highlighting differences in custom code of GTM tags
 
 Installation options
 --------------------
