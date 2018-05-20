@@ -5,8 +5,8 @@ A Chrome extension to for diffing GTM code within DevTools
 
 Installation options
 --------------------
-* Drop the [gtmdiff.crx](https://github.com/gonensh/gtmdiff/raw/master/dist/gtmdiff.crx) file into the [extensions page](chrome://extensions/)
-* Clone the repository and load the unpacked extension in the [extensions page](chrome://extensions/)
+* Drop the [gtmdiff.crx](https://github.com/gonensh/gtmdiff/raw/master/dist/gtmdiff.crx) file into the extensions page (chrome://extensions/)
+* Clone the repository and load the unpacked extension in the extensions page (chrome://extensions/)
 * [COMING SOON] Install the extension from the Chrome Web Store
 
 Usage
